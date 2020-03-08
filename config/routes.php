@@ -45,6 +45,18 @@ use Cake\Routing\RouteBuilder;
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
 
+// API
+$routes->scope('/api', function (RouteBuilder $builder) {
+    $builder->setExtensions(['json']);
+
+    // Tasks
+    $builder->connect('/tasks', ['controller' => 'Tasks', 'action' => 'index'])->setMethods(['GET']);
+    $builder->connect('/tasks/:id', ['controller' => 'Tasks', 'action' => 'view'])->setPass(['id'])->setMethods(['GET']);
+    $builder->connect('/tasks', ['controller' => 'Tasks', 'action' => 'add'])->setMethods(['POST']);
+    $builder->connect('/tasks/:id', ['controller' => 'Tasks', 'action' => 'edit'])->setPass(['id'])->setMethods(['PUT']);
+    $builder->connect('/tasks/:id', ['controller' => 'Tasks', 'action' => 'delete'])->setPass(['id'])->setMethods(['DELETE']);
+});
+
 $routes->scope('/', function (RouteBuilder $builder) {
     // Register scoped middleware for in scopes.
     $builder->registerMiddleware('csrf', new CsrfProtectionMiddleware([
