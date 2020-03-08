@@ -41,7 +41,7 @@ curl https://raw.githubusercontent.com/laravel/laravel/master/resources/sass/app
 docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install
 ```
 
-webpack.mix.js の内容を変更します。
+./webpack.mix.js 変更 - CakePHP の形に合わせる
 
 ```
 mix.setPublicPath('webroot')
@@ -49,3 +49,20 @@ mix.setPublicPath('webroot')
     .sass('assets/sass/app.scss', 'assets/css')
     .sourceMaps();
 ```
+
+./.gitignore 追加 - 余計なファイルをリポジトリにあげないようにする
+
+```
+# Laravel Mix specific files #
+##############################
+/node_modules/
+/webroot/assets/
+/webroot/mix-manifest.json
+```
+
+## Docker の準備
+
+docker-compose を動かすためのファイルを用意
+
+- ./docker-compose.yml の作成
+- ./docker/local 配下の各種ファイルの作成
