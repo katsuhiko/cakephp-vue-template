@@ -16,7 +16,7 @@ use Cake\Datasource\ConnectionManager;
 class TasksController extends AppController
 {
     /** */
-    public function index(): void
+    public function search(): void
     {
         $tasks = $this->Tasks->find()->all();
 
@@ -29,7 +29,7 @@ class TasksController extends AppController
     /**
      * @param string $id
      */
-    public function view(string $id): void
+    public function detail(string $id): void
     {
         $task = $this->Tasks->get($id);
 
@@ -40,7 +40,7 @@ class TasksController extends AppController
     }
 
     /** */
-    public function add(): void
+    public function create(): void
     {
         $data = $this->request->input('json_decode', true);
 
@@ -68,7 +68,7 @@ class TasksController extends AppController
     /**
      * @param string $id
      */
-    public function edit(string $id): void
+    public function update(string $id): void
     {
         $data = $this->request->input('json_decode', true);
         $task = $this->Tasks->get($id);
