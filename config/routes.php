@@ -46,7 +46,7 @@ use Cake\Routing\RouteBuilder;
 $routes->setRouteClass(DashedRoute::class);
 
 // API
-$routes->prefix('Api', function (RouteBuilder $builder) {
+$routes->scope('/api', ['prefix' => 'api'], function (RouteBuilder $builder) {
     $builder->setExtensions(['json']);
 
     // Tasks
@@ -74,12 +74,14 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, templates/Pages/home.php)...
      */
-    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+    //$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+    //$builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+
+    $builder->connect('/*', ['controller' => 'Pages', 'action' => 'index']);
 
     /*
      * Connect catchall routes for all controllers.

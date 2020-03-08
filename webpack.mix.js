@@ -14,4 +14,4 @@ const mix = require('laravel-mix');
 mix.setPublicPath('webroot')
     .js('assets/js/app.js', 'assets/js')
     .sass('assets/sass/app.scss', 'assets/css')
-    .sourceMaps();
+    .sourceMaps().webpackConfig({devtool: 'source-map'});;

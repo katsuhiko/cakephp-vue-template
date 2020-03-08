@@ -39,6 +39,8 @@ curl https://raw.githubusercontent.com/laravel/laravel/master/resources/js/boots
 curl https://raw.githubusercontent.com/laravel/laravel/master/resources/sass/app.scss -o ./assets/sass/app.scss
 
 docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install
+docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install --save-dev vue
+docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install --save-dev vue-router
 ```
 
 ./webpack.mix.js 変更 - CakePHP の形に合わせる

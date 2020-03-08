@@ -13,7 +13,7 @@ trim_trailing_whitespace = true
 [*.bat]
 end_of_line = crlf
 
-[*.yml]
+[{*.yml,*.json,*.scss,*.html,*.js,*.vue}]
 indent_size = 2
 
 [*.twig]
