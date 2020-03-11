@@ -8,8 +8,8 @@ docker run --rm -it -v $(pwd):/home/app -w /home/app katsuhikonagashima/php-fpm-
 ```
 
 ```
-apt-get install -y wget
-wget https://getcomposer.org/download/1.9.3/composer.phar
+apt-get install -y curl
+curl -sS https://getcomposer.org/installer | php
 
 php composer.phar create-project --prefer-dist cakephp/app:4.* cakephp-vue-template
 
@@ -28,6 +28,21 @@ git push -u origin master
 
 
 ## Laravel Mix のインストール
+
+```
+cd ..
+docker run --rm -it -v $(pwd):/home/app -w /home/app katsuhikonagashima/php-fpm-base:7.4-buster /bin/bash
+```
+
+```
+apt-get install -y curl
+curl -sS https://getcomposer.org/installer | php
+
+php composer.phar create-project --prefer-dist laravel/laravel laravel-template
+cd laravel-template
+php ../composer.phar require laravel/ui
+php artisan ui vue
+```
 
 ```
 mkdir -p ./assets/js ./assets/sass
