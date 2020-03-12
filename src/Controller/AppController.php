@@ -17,6 +17,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Datasource\ConnectionManager;
+use Cake\Datasource\ConnectionInterface;
+
 
 /**
  * Application Controller
@@ -49,5 +52,10 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    protected function connection(): ConnectionInterface
+    {
+        return ConnectionManager::get('default');
     }
 }

@@ -21,6 +21,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
@@ -47,6 +48,9 @@ $routes->setRouteClass(DashedRoute::class);
 
 // API
 $routes->scope('/api', ['prefix' => 'api'], function (RouteBuilder $builder) {
+    $builder->registerMiddleware('bodies', new BodyParserMiddleware());
+    $builder->applyMiddleware('bodies');
+    
     $builder->setExtensions(['json']);
 
     // Tasks

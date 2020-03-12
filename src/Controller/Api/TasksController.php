@@ -38,7 +38,7 @@ class TasksController extends AppController
     /** */
     public function create(): void
     {
-        $data = $this->request->input('json_decode', true);
+        $data = $this->request->getData();
 
         $task = $this->Tasks->newEntity($data);
         if ($task->hasErrors()) {
@@ -47,7 +47,7 @@ class TasksController extends AppController
             return;
         }
 
-        ConnectionManager::get('default')->transactional(function () use ($task) {
+        $this->connection()->transactional(function () use ($task) {
             if (!$this->Tasks->save($task)) {
                 throw new ApplicationException(__('登録できませんでした。'));
             }
@@ -62,7 +62,7 @@ class TasksController extends AppController
      */
     public function update(string $id): void
     {
-        $data = $this->request->input('json_decode', true);
+        $data = $this->request->getData();
         $task = $this->Tasks->get($id);
 
         $task = $this->Tasks->patchEntity($task, $data);
@@ -72,7 +72,7 @@ class TasksController extends AppController
             return;
         }
 
-        ConnectionManager::get('default')->transactional(function () use ($task) {
+        $this->connection()->transactional(function () use ($task) {
             if (!$this->Tasks->save($task)) {
                 throw new ApplicationException(__('更新できませんでした。'));
             }
@@ -89,7 +89,7 @@ class TasksController extends AppController
     {
         $task = $this->Tasks->get($id);
 
-        ConnectionManager::get('default')->transactional(function () use ($task) {
+        $this->connection()->transactional(function () use ($task) {
             if (!$this->Tasks->delete($task)) {
                 throw new ApplicationException(__('削除できませんでした。'));
             }
