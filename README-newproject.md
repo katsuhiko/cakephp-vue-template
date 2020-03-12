@@ -17,6 +17,8 @@ cp composer.phar ./cakephp-vue-template/
 exit
 ```
 
+Github へ追加する。
+
 ```
 cd cakephp-vue-template/
 git init
@@ -42,19 +44,20 @@ php composer.phar create-project --prefer-dist laravel/laravel laravel-template
 cd laravel-template
 php ../composer.phar require laravel/ui
 php artisan ui vue
+exit
 ```
 
 ```
-mkdir -p ./assets/js ./assets/sass
+cd ../cakephp-vue-template/
 
-curl https://raw.githubusercontent.com/laravel/laravel/master/package.json -O
-curl https://raw.githubusercontent.com/laravel/laravel/master/webpack.mix.js -O
-curl https://raw.githubusercontent.com/laravel/laravel/master/resources/js/app.js -o ./assets/js/app.js
-curl https://raw.githubusercontent.com/laravel/laravel/master/resources/js/bootstrap.js -o ./assets/js/bootstrap.js
-curl https://raw.githubusercontent.com/laravel/laravel/master/resources/sass/app.scss -o ./assets/sass/app.scss
+cp ../laravel-template/package.json ./
+cp ../laravel-template/webpack.mix.js ./
+
+mkdir -p ./assets
+cp -r ../laravel-template/resources/js ./assets/js
+cp -r ../laravel-template/resources/sass ./assets/sass
 
 docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install
-docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install --save-dev vue
 docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install --save-dev vue-router
 ```
 
@@ -64,7 +67,7 @@ docker run --rm -it -v $(pwd):/home/app -w /home/app node:12 npm install --save-
 mix.setPublicPath('webroot')
     .js('assets/js/app.js', 'assets/js')
     .sass('assets/sass/app.scss', 'assets/css')
-    .sourceMaps();
+    .sourceMaps().webpackConfig({devtool: 'source-map'});;
 ```
 
 ./.gitignore 追加 - 余計なファイルをリポジトリにあげないようにする
@@ -76,6 +79,7 @@ mix.setPublicPath('webroot')
 /webroot/assets/
 /webroot/mix-manifest.json
 ```
+
 
 ## Docker の準備
 
