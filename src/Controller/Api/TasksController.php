@@ -20,10 +20,8 @@ class TasksController extends AppController
     {
         $tasks = $this->Tasks->find()->all();
 
-        $this->set([
-            'tasks' => $tasks,
-            '_serialize' => ['tasks']
-        ]);
+        $this->set('tasks', $tasks);
+        $this->viewBuilder()->setOption('serialize', ['tasks']);
     }
 
     /**
@@ -33,10 +31,8 @@ class TasksController extends AppController
     {
         $task = $this->Tasks->get($id);
 
-        $this->set([
-            'task' => $task,
-            '_serialize' => ['task']
-        ]);
+        $this->set('task', $task);
+        $this->viewBuilder()->setOption('serialize', ['task']);
     }
 
     /** */
@@ -46,10 +42,8 @@ class TasksController extends AppController
 
         $task = $this->Tasks->newEntity($data);
         if ($task->hasErrors()) {
-            $this->set([
-                'errors' => $task->getErrors(),
-                '_serialize' => ['errors']
-            ]);
+            $this->set('errors', $task->getErrors());
+            $this->viewBuilder()->setOption('serialize', ['errors']);
             return;
         }
 
@@ -59,10 +53,8 @@ class TasksController extends AppController
             }
         });
 
-        $this->set([
-            'task' => $task,
-            '_serialize' => ['task']
-        ]);
+        $this->set('task', $task);
+        $this->viewBuilder()->setOption('serialize', ['task']);
     }
 
     /**
@@ -75,10 +67,8 @@ class TasksController extends AppController
 
         $task = $this->Tasks->patchEntity($task, $data);
         if ($task->hasErrors()) {
-            $this->set([
-                'errors' => $task->getErrors(),
-                '_serialize' => ['errors']
-            ]);
+            $this->set('errors', $task->getErrors());
+            $this->viewBuilder()->setOption('serialize', ['errors']);
             return;
         }
 
@@ -88,10 +78,8 @@ class TasksController extends AppController
             }
         });
 
-        $this->set([
-            'task' => $task,
-            '_serialize' => ['task']
-        ]);
+        $this->set('task', $task);
+        $this->viewBuilder()->setOption('serialize', ['task']);
     }
 
     /**
@@ -108,6 +96,6 @@ class TasksController extends AppController
         });
 
         $this->response = $this->response->withStatus(204);
-        $this->set(['_serialize' => '']);
+        $this->viewBuilder()->setOption('serialize', []);
     }
 }
